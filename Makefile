@@ -1,4 +1,4 @@
-PHILO_FILES = main.c check.c start_philo.c
+PHILO_FILES = main.c check.c start_data.c
 OBJS = ${PHILO_FILES:.c=.o}
 CC = cc
 RM = rm -f

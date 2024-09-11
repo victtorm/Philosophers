@@ -1,22 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start.philo.c                                      :+:      :+:    :+:   */
+/*   race_test.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 13:12:36 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/08/27 13:20:34 by vbritto-         ###   ########.fr       */
+/*   Created: 2024/08/28 15:29:05 by vbritto-          #+#    #+#             */
+/*   Updated: 2024/08/28 15:32:23 by vbritto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <pthread.h>
 
-void	start_philo(t_philo *philo, char	**argv)
+int mails = 0;
+
+void	*routine()
 {
-	philo->n_philo = ft_atoi(argv[1]);
-	philo->time_die = ft_atoi(argv[2]);
-	philo->time_eat = ft_atoi(argv[3]);
-	philo->time_sleep = ft_atoi(argv[4]);
-	philo->meals = ft_atoi(argv[5]);
+	int i = 0;
+
+	while (i < 100000000)
+	{
+		mails++;
+		i++;
+	}
+}
+
+int	main(int argc, char **argv)
+{
+	pthread_t	t1, t2;
+
+	pthread_create(&t1, NULL, &routine, NULL);
+	pthread_create(&t2, NULL, &routine, NULL);
+	pthread_join(t1, NULL);
+	pthread_join(t2, NULL);
+
+	printf("%d\n", mails);
+	return (0);
 }

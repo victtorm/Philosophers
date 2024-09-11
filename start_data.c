@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   start_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/26 12:19:39 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/09/11 09:53:03 by vbritto-         ###   ########.fr       */
+/*   Created: 2024/08/27 13:12:36 by vbritto-          #+#    #+#             */
+/*   Updated: 2024/09/11 09:48:20 by vbritto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_data	*memdata(t_data *data)
+void	start_data(t_data *data, int argc, char **argv)
 {
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (NULL);
-	memset(data, 0, sizeof(t_data));
-	return (data);
-}
-
-int	main(int argc, char **argv)
-{
-	t_data	*data;
-
-	if (!check_philo(argc, argv))
-		return (0);
-	data = NULL;
-	data = memdata(data);
-	start_data(data, argc, argv);
-	start_lunch(data);
-	printf ("OK");
-	free(data);
-	return (1);
+	data->n_philo = ft_atoi(argv[1]);
+	data->time_die = ft_atoi(argv[2]);
+	data->time_eat = ft_atoi(argv[3]);
+	data->time_sleep = ft_atoi(argv[4]);
+	if (argc == 6)
+		data->meals = ft_atoi(argv[5]);
+	else
+		data->meals = -1;
 }

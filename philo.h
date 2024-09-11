@@ -24,14 +24,17 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 
-typedef struct s_philo
+
+
+
+typedef struct s_data
 {
     int n_philo;
     int time_die;
     int time_eat;
     int time_sleep;
     int meals;
-}   t_philo;
+}   t_data;
 
 
 // CHECK.C
@@ -43,6 +46,6 @@ int     ft_atoi(const char *str);
 
 // START_PHILO.C
 
-void	start_philo(t_philo *philo, char	**argv);
+void	start_data(t_data *data, int argc, char **argv);
 
 #endif

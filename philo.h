@@ -25,15 +25,36 @@
 # include <sys/types.h>
 
 
+typedef struct philo
+{
+    int				philo_id;
+    int				n_meals;
+    bool			full;
+    long			last_meal;
+    pthread_t		thread_p;
+    pthread_mutex_t	*rigth_fork;
+    pthread_mutex_t	*left_fork;
+    struct s_data	*data;
+    
+}   t_philo;
 
 
 typedef struct s_data
 {
-    int n_philo;
-    int time_die;
-    int time_eat;
-    int time_sleep;
-    int meals;
+    int				n_philo;
+    long 			time_die;
+    long			time_eat;
+    long			time_sleep;
+    int				meals;
+    long			start;
+    bool			threads_ok;
+    bool			dead;
+    bool			full;
+    t_philo			*philos;
+    pthread_mutex_t	monitor;
+    pthread_mutex_t	print;
+    pthread_mutex_t	*forks;
+    pthread_mutex_t	finish;
 }   t_data;
 
 

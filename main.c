@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: victtormoraes <victtormoraes@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:19:39 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/09/11 09:53:03 by vbritto-         ###   ########.fr       */
+/*   Updated: 2024/09/15 19:54:08 by victtormora      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,12 @@ t_data	*memdata(t_data *data)
 
 int	main(int argc, char **argv)
 {
-	t_data	*data;
+	t_data	data;
 
 	if (!check_philo(argc, argv))
 		return (0);
-	data = NULL;
-	data = memdata(data);
-	start_data(data, argc, argv);
-	start_lunch(data);
-	printf ("OK");
-	free(data);
+	start_data(&data, argc, argv);
+	start_diner(data);
+	free(&data);
 	return (1);
 }

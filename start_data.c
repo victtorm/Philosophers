@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   start_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victtormoraes <victtormoraes@student.42    +#+  +:+       +#+        */
+/*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 13:12:36 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/09/15 19:31:00 by victtormora      ###   ########.fr       */
+/*   Updated: 2024/09/19 18:24:32 by vbritto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*start_fork(t_data *data)
+void	*start_forks(t_data *data)
 {
 	int	i;
 
@@ -23,18 +23,23 @@ void	*start_fork(t_data *data)
 	while (i < data->n_philo)
 	{
 		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
-			return (error);
+		{
+			data->fail = true;
+			return (NULL); 
+		}
 		i++;
 	}
-	if (pthread_mutex_init(&data->monitor, NULL) != 0)
-		return (error);
-	if (pthread_mutex_init(&data->print, NULL) != 0)
-		return (error);
-	if (pthread_mutex_init(&data->finish, NULL) != 0)
-		return (error);
+	if (pthread_mutex_init(&data->monitor, NULL) != 0
+		|| pthread_mutex_init(&data->print, NULL) != 0
+		|| pthread_mutex_init(&data->finish, NULL) != 0)
+	{
+		clean_destroy(data);
+		return (NULL);
+	}
+	return (NULL);
 }
 
-void	*start_more(t_data *data)
+void	*start_all(t_data *data)
 {
 	int	i;
 
@@ -48,7 +53,7 @@ void	*start_more(t_data *data)
 		data->philos[i].n_meals = 0;
 		data->philos[i].full = 0;
 		data->philos[i].last_meal = 0;
-		if (1 + i = data->n_philo)
+		if (i + 1 == data->n_philo)
 			data->philos[i].rigth_fork = &data->forks[0];
 		else
 			data->philos[i].rigth_fork = &data->forks[i + 1];
@@ -57,6 +62,7 @@ void	*start_more(t_data *data)
 		i++;
 	}
 	start_forks(data);
+	return (NULL);
 }
 
 void	start_data(t_data *data, int argc, char **argv)
@@ -65,12 +71,12 @@ void	start_data(t_data *data, int argc, char **argv)
 	data->time_die = ft_atoi(argv[2]);
 	data->time_eat = ft_atoi(argv[3]);
 	data->time_sleep = ft_atoi(argv[4]);
-	data->meals = -1; 
+	data->meals = -1;
 	if (argc == 6)
 		data->meals = ft_atoi(argv[5]);
 	data->threads_ok = 0;
 	data->full = 0;
 	data->dead = 0;
-	start_more(data);
-	
+	data->fail = 0;
+	start_all(data);
 }

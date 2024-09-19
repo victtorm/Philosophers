@@ -1,4 +1,5 @@
-PHILO_FILES = main.c check.c start_data.c
+PHILO_FILES = main.c check.c start_data.c start_dinner.c utils.c routine.c \
+				acts.c
 OBJS = ${PHILO_FILES:.c=.o}
 CC = cc
 RM = rm -f
@@ -7,11 +8,8 @@ NAME = philo
 
 all:		${NAME}
 
-${NAME}:	${OBJS} ${LIBFTA}
-			${CC} ${CFLAGS} $(OBJS) ${LIBFTA} -o ${NAME}
-
-${LIBFTA}:	${LIBFTD}
-		make -C ${LIBFTD}
+${NAME}:	${OBJS}
+			${CC} ${CFLAGS} $(OBJS) -o ${NAME}
 
 clean:
 			${RM} ${OBJS} ${OBJSB}

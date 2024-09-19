@@ -6,36 +6,11 @@
 /*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:46:20 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/08/27 15:13:09 by vbritto-         ###   ########.fr       */
+/*   Updated: 2024/09/19 14:43:21 by vbritto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-long	ft_atol(const char *str)
-{
-	int		i;
-	int		sin;
-	long	res;
-
-	i = 0;
-	sin = 1;
-	res = 0;
-	if (str[i] == 45)
-	{
-		sin *= -1;
-		i++;
-	}
-	while (str[i] == 45 || str[i] == 43)
-		i++;
-	while ((str[i] != '\0') && (str[i] >= 48 && str[i] <= 57))
-	{
-		res *= 10;
-		res += str[i] - '0';
-		i++;
-	}
-	return (res * sin);
-}
 
 int	ft_atoi(const char *str)
 {
@@ -62,12 +37,13 @@ int	ft_atoi(const char *str)
 	}
 	return (res * sin);
 }
+
 void	check_intmax(char **argv, bool *just_number)
 {
 	int	i;
 
 	i = 1;
-	while(argv[i])
+	while (argv[i])
 	{
 		if (ft_atol(argv[i]) > INT_MAX)
 			(*just_number) = false;
@@ -114,14 +90,14 @@ int	check_philo(int argc, char **argv)
 		check_philo_args(argc, &just_number, argv);
 		check_intmax(argv, &just_number);
 	}
-	else	
+	else
 		just_number = false;
 	if (just_number == false)
 	{
 		printf ("ERROR\n");
-		printf ("Try: ./philo [philos] [time_die] [time_eat] [time_sleep] [meals]\n");
+		printf ("Try: ./philo [philos] [t_die] [t_eat] [t_sleep] [meals]\n");
 		printf ("The number of philos need to be 1 or more\n");
-		printf ("Only possible to use positive numbers inside int range for times\n");
+		printf ("Only possible to use positive numbers inside int range\n");
 		return (0);
 	}
 	return (1);

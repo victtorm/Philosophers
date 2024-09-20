@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_dinner.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: victtormoraes <victtormoraes@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:26:05 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/09/19 18:23:47 by vbritto-         ###   ########.fr       */
+/*   Updated: 2024/09/20 10:22:51 by victtormora      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,5 @@ void	start_dinner(t_data *data)
 	data->threads_ok = true;
 	pthread_mutex_unlock(&data->monitor);
 	monitor(data);
-	i = 0;
 	join_philos(data);
 }

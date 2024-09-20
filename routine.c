@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: victtormoraes <victtormoraes@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:27:40 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/09/19 18:16:07 by vbritto-         ###   ########.fr       */
+/*   Updated: 2024/09/20 10:31:32 by victtormora      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_act(t_philo *philo, char *str)
 	if (!philo->data->dead && !philo->data->full)
 	{
 		pthread_mutex_lock(&philo->data->print);
-		printf("%ld %s\n", get_time(), str);
+		printf("%ld %d %s\n", get_time() - philo->data->start, philo->philo_id, str);
 		pthread_mutex_unlock(&philo->data->print);
 	}
 	pthread_mutex_unlock(&philo->data->finish);
@@ -50,7 +50,7 @@ int	dinner_finish(t_philo *philo)
 		pthread_mutex_unlock(&philo->data->finish);
 		return (0);
 	}
-	pthread_mutex_lock(&philo->data->finish);
+	pthread_mutex_unlock(&philo->data->finish);
 	return (1);
 }
 

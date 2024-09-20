@@ -6,7 +6,7 @@
 /*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:21:32 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/09/19 18:14:22 by vbritto-         ###   ########.fr       */
+/*   Updated: 2024/09/20 12:40:35 by vbritto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ long	get_time(void);
 
 // ACTS.C
 
-void	eat(t_philo *philo);
+void	eat_r(t_philo *philo);
+void	eat_l(t_philo *philo);
 void	p_sleep(t_philo *philo);
 void	think(t_philo *philo);
 

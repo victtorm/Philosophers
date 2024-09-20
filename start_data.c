@@ -6,7 +6,7 @@
 /*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 13:12:36 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/09/19 18:24:32 by vbritto-         ###   ########.fr       */
+/*   Updated: 2024/09/20 12:45:51 by vbritto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*start_forks(t_data *data)
 	int	i;
 
 	i = 0;
-	data->forks = malloc(data->n_philo * (sizeof(t_philo)));
+	data->forks = malloc(data->n_philo * (sizeof(pthread_mutex_t)));
 	if (!data->forks)
 		return (NULL);
 	while (i < data->n_philo)
@@ -44,6 +44,7 @@ void	*start_all(t_data *data)
 	int	i;
 
 	i = 0;
+	start_forks(data);
 	data->philos = malloc(data->n_philo * (sizeof(t_philo)));
 	if (!data->philos)
 		return (NULL);
@@ -61,7 +62,6 @@ void	*start_all(t_data *data)
 		data->philos[i].data = data;
 		i++;
 	}
-	start_forks(data);
 	return (NULL);
 }
 

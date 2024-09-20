@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victtormoraes <victtormoraes@student.42    +#+  +:+       +#+        */
+/*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:27:40 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/09/20 10:31:32 by victtormora      ###   ########.fr       */
+/*   Updated: 2024/09/20 13:12:57 by vbritto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long	get_time(void)
+time_t	get_time(void)
 {
 	struct timeval	time;
-	long			momemt;
+	time_t			momemt;
 
 	gettimeofday(&time, NULL);
 	momemt = (time.tv_sec * 1000) + (time.tv_usec / 1000);
@@ -70,9 +70,9 @@ void	*routine(void *philos)
 		if (!dinner_finish(philo))
 			return (NULL);
 		if (philo->philo_id % 2 != 0)
-			eat(philo);
+			eat_r(philo);
 		else
-			eat(philo);
+			eat_l(philo);
 		p_sleep(philo);
 		think(philo);
 	}

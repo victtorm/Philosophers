@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_dinner.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victtormoraes <victtormoraes@student.42    +#+  +:+       +#+        */
+/*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:26:05 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/09/20 10:22:51 by victtormora      ###   ########.fr       */
+/*   Updated: 2024/09/20 13:02:47 by vbritto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	check_die(t_data *data, int i)
 		data->dead = true;
 		pthread_mutex_unlock(&data->finish);
 		pthread_mutex_unlock(&data->monitor);
-		return (1);
+		return (0);
 	}
-	return (0);
+	return (1);
 }
 
 int	check_meals(t_data *data)
@@ -46,9 +46,9 @@ int	check_meals(t_data *data)
 		data->full = true;
 		pthread_mutex_unlock(&data->finish);
 		pthread_mutex_unlock(&data->monitor);
-		return (1);
+		return (0);
 	}
-	return (0);
+	return (1);
 }
 
 void	monitor(t_data *data)
@@ -61,9 +61,9 @@ void	monitor(t_data *data)
 		while (i < data->n_philo)
 		{
 			pthread_mutex_lock(&data->monitor);
-			if (check_die(data, i))
+			if (!check_die(data, i))
 				return ;
-			if (check_meals(data))
+			if (!check_meals(data))
 				return ;
 			pthread_mutex_unlock(&data->monitor);
 			i++;
@@ -92,6 +92,7 @@ void	start_dinner(t_data *data)
 	i = 0;
 	/*if (data->meals == 0)
 		return (no_food(data));*/
+	data->start = get_time();
 	while (data->n_philo > i)
 	{
 		if (pthread_create(&data->philos[i].thread_p, NULL,
@@ -102,7 +103,6 @@ void	start_dinner(t_data *data)
 		}
 		i++;
 	}
-	data->start = get_time();
 	pthread_mutex_lock(&data->monitor);
 	data->threads_ok = true;
 	pthread_mutex_unlock(&data->monitor);

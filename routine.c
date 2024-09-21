@@ -6,16 +6,16 @@
 /*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:27:40 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/09/20 13:12:57 by vbritto-         ###   ########.fr       */
+/*   Updated: 2024/09/21 13:51:50 by vbritto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-time_t	get_time(void)
+size_t	get_time(void)
 {
 	struct timeval	time;
-	time_t			momemt;
+	size_t			momemt;
 
 	gettimeofday(&time, NULL);
 	momemt = (time.tv_sec * 1000) + (time.tv_usec / 1000);
@@ -64,15 +64,15 @@ void	*routine(void *philos)
 	if (philo->data->n_philo == 1)
 		return (just_one(philo));
 	if (philo->philo_id % 2 == 0)
-		usleep(10);
+		ft_usleep(10);
 	while (42)
 	{
 		if (!dinner_finish(philo))
 			return (NULL);
 		if (philo->philo_id % 2 != 0)
-			eat_r(philo);
+			eat(philo, philo->left_fork, philo->rigth_fork);
 		else
-			eat_l(philo);
+			eat(philo, philo->rigth_fork, philo->left_fork);
 		p_sleep(philo);
 		think(philo);
 	}

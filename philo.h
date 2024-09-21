@@ -6,7 +6,7 @@
 /*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:21:32 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/09/20 12:40:35 by vbritto-         ###   ########.fr       */
+/*   Updated: 2024/09/21 13:51:58 by vbritto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct philo
 	int				philo_id;
 	int				n_meals;
 	bool			full;
-	long			last_meal;
+	size_t			last_meal;
 	pthread_t		thread_p;
 	pthread_mutex_t	*rigth_fork;
 	pthread_mutex_t	*left_fork;
@@ -41,7 +41,7 @@ typedef struct s_data
 	long			time_eat;
 	long			time_sleep;
 	int				meals;
-	long			start;
+	size_t			start;
 	bool			threads_ok;
 	bool			dead;
 	bool			full;
@@ -85,17 +85,17 @@ int		check_die(t_data *data, int i);
 
 // ROUTINE.C
 
-void	*routine(void *philos);
 int		dinner_finish(t_philo *philo);
 void	*just_one(t_philo *philo);
 void	print_act(t_philo *philo, char *str);
-long	get_time(void);
+size_t	get_time(void);
+void	*routine(void *philos);
 
 // ACTS.C
 
-void	eat_r(t_philo *philo);
-void	eat_l(t_philo *philo);
+void	eat(t_philo *philo, pthread_mutex_t *fork_one, pthread_mutex_t *fork_two);
 void	p_sleep(t_philo *philo);
 void	think(t_philo *philo);
+void	ft_usleep(size_t time);
 
 #endif

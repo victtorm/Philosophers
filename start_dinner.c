@@ -6,7 +6,7 @@
 /*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:26:05 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/09/20 13:02:47 by vbritto-         ###   ########.fr       */
+/*   Updated: 2024/09/21 13:47:19 by vbritto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 int	check_die(t_data *data, int i)
 {
+	//pthread_mutex_lock(&data->philos->data->print);
+	//printf("get_time: %ld\ndata: %ld\nlastmeal: %ld\n die: %ld\n %d\n", get_time(), data->start, data->philos[i].last_meal, (long)data->time_die, i);
+	//pthread_mutex_unlock(&data->philos->data->print);
 	if ((get_time() - data->start) - data->philos[i].last_meal
-		>= (long)data->time_die)
+		>= (size_t)data->time_die)
 	{
 		print_act(&data->philos[i], "died");
 		pthread_mutex_lock(&data->finish);
@@ -90,13 +93,10 @@ void	start_dinner(t_data *data)
 	int	i;
 
 	i = 0;
-	/*if (data->meals == 0)
-		return (no_food(data));*/
 	data->start = get_time();
-	while (data->n_philo > i)
+	while (i < data->n_philo)
 	{
-		if (pthread_create(&data->philos[i].thread_p, NULL,
-				&routine, &data->philos[i]) != 0)
+		if (pthread_create(&data->philos[i].thread_p, NULL, &routine, &data->philos[i]) != 0)
 		{
 			clean_destroy(data);
 			return ;

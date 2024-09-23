@@ -6,7 +6,7 @@
 /*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 13:12:36 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/09/20 12:45:51 by vbritto-         ###   ########.fr       */
+/*   Updated: 2024/09/23 12:39:49 by vbritto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*start_forks(t_data *data)
 		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
 		{
 			data->fail = true;
-			return (NULL); 
+			return (NULL);
 		}
 		i++;
 	}

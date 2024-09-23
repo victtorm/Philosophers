@@ -6,7 +6,7 @@
 /*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:42:55 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/09/19 18:13:29 by vbritto-         ###   ########.fr       */
+/*   Updated: 2024/09/23 12:35:18 by vbritto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ int	wait_all_philos(t_data *data)
 	return (1);
 }
 
-void	clean_philos(t_data *data)
+void	clean_forks(t_data *data)
 {
 	int	i;
 
 	i = 0;
 	while (&data->philos[i] && i < data->n_philo)
 	{
-		pthread_mutex_destroy(&data->forks[i]);
-		free(&data->philos[i]);
+		if (&data->philos[i])
+			pthread_mutex_destroy(&data->forks[i]);
 		i++;
 	}
 	free(data->forks);
@@ -52,12 +52,11 @@ void	clean_destroy(t_data *data)
 	{
 		if (data->philos)
 		{
-			clean_philos(data);
+			clean_forks(data);
 			pthread_mutex_destroy(&data->monitor);
 			pthread_mutex_destroy(&data->print);
 			pthread_mutex_destroy(&data->finish);
 		}
-		free(data);
 	}
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:21:32 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/09/21 13:51:58 by vbritto-         ###   ########.fr       */
+/*   Updated: 2024/09/23 12:38:56 by vbritto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		ft_atoi(const char *str);
 
 long	ft_atol(const char *str);
 void	clean_destroy(t_data *data);
-void	clean_philos(t_data *data);
+void	clean_forks(t_data *data);
 int		wait_all_philos(t_data *data);
 
 // START_DATA.C
@@ -93,9 +93,10 @@ void	*routine(void *philos);
 
 // ACTS.C
 
-void	eat(t_philo *philo, pthread_mutex_t *fork_one, pthread_mutex_t *fork_two);
+void	eat(t_philo *philo,
+			pthread_mutex_t *fork_one, pthread_mutex_t *fork_two);
 void	p_sleep(t_philo *philo);
 void	think(t_philo *philo);
-void	ft_usleep(size_t time);
+void	my_usleep(size_t time);
 
 #endif

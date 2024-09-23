@@ -6,7 +6,7 @@
 /*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:27:40 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/09/21 13:51:50 by vbritto-         ###   ########.fr       */
+/*   Updated: 2024/09/23 12:39:20 by vbritto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	print_act(t_philo *philo, char *str)
 	if (!philo->data->dead && !philo->data->full)
 	{
 		pthread_mutex_lock(&philo->data->print);
-		printf("%ld %d %s\n", get_time() - philo->data->start, philo->philo_id, str);
+		printf("%ld %d %s\n",
+			get_time() - philo->data->start, philo->philo_id, str);
 		pthread_mutex_unlock(&philo->data->print);
 	}
 	pthread_mutex_unlock(&philo->data->finish);
@@ -64,7 +65,7 @@ void	*routine(void *philos)
 	if (philo->data->n_philo == 1)
 		return (just_one(philo));
 	if (philo->philo_id % 2 == 0)
-		ft_usleep(10);
+		my_usleep(10);
 	while (42)
 	{
 		if (!dinner_finish(philo))

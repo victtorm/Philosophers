@@ -6,7 +6,7 @@
 /*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:27:40 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/09/24 10:44:40 by vbritto-         ###   ########.fr       */
+/*   Updated: 2024/09/24 12:58:58 by vbritto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ int	dinner_finish(t_philo *philo)
 	if (philo->data->dead || philo->data->full)
 	{
 		pthread_mutex_unlock(&philo->data->finish);
-		return (0);
+		return (1);
 	}
 	pthread_mutex_unlock(&philo->data->finish);
-	return (1);
+	return (0);
 }
 
 void	*routine(void *philos)
@@ -66,10 +66,8 @@ void	*routine(void *philos)
 		return (just_one(philo));
 	if (philo->philo_id % 2 == 0)
 		my_sleep(10, philo);
-	while (42)
+	while (!dinner_finish(philo))
 	{
-		if (!dinner_finish(philo))
-			return (NULL);
 		if (philo->philo_id % 2 != 0)
 			eat(philo, philo->left_fork, philo->rigth_fork);
 		else

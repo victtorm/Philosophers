@@ -6,7 +6,7 @@
 /*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:05:46 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/09/24 10:49:09 by vbritto-         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:14:35 by vbritto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	my_sleep(size_t time, t_philo *philo)
 		pthread_mutex_lock(&philo->data->monitor);
 		if (philo && philo->data && philo->data->dead)
 		{
-			pthread_mutex_unlock(&philo->data->monitor);	
+			pthread_mutex_unlock(&philo->data->monitor);
 			break ;
 		}
 		pthread_mutex_unlock(&philo->data->monitor);

@@ -6,7 +6,7 @@
 /*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:26:05 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/09/24 10:44:00 by vbritto-         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:22:25 by vbritto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	check_die(t_data *data, int i)
 		pthread_mutex_lock(&data->finish);
 		data->dead = true;
 		pthread_mutex_unlock(&data->finish);
-		pthread_mutex_unlock(&data->monitor);
 		return (0);
 	}
 	return (1);
@@ -45,7 +44,6 @@ int	check_meals(t_data *data)
 		pthread_mutex_lock(&data->finish);
 		data->full = true;
 		pthread_mutex_unlock(&data->finish);
-		pthread_mutex_unlock(&data->monitor);
 		return (0);
 	}
 	return (1);
@@ -55,16 +53,22 @@ void	monitor(t_data *data)
 {
 	int	i;
 
-	while (42)
+	while (!data->full && !data->dead)
 	{
 		i = 0;
 		while (i < data->n_philo)
 		{
 			pthread_mutex_lock(&data->monitor);
 			if (!check_die(data, i))
+			{
+				pthread_mutex_unlock(&data->monitor);
 				return ;
+			}
 			if (!check_meals(data))
+			{
+				pthread_mutex_unlock(&data->monitor);
 				return ;
+			}
 			pthread_mutex_unlock(&data->monitor);
 			i++;
 		}

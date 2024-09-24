@@ -6,7 +6,7 @@
 /*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:42:55 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/09/23 12:35:18 by vbritto-         ###   ########.fr       */
+/*   Updated: 2024/09/23 13:07:10 by vbritto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	clean_destroy(t_data *data)
 			pthread_mutex_destroy(&data->monitor);
 			pthread_mutex_destroy(&data->print);
 			pthread_mutex_destroy(&data->finish);
+			free(data->philos);
 		}
 	}
 	return ;

@@ -6,7 +6,7 @@
 /*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:21:32 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/09/23 12:38:56 by vbritto-         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:00:27 by vbritto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,6 @@ void	eat(t_philo *philo,
 			pthread_mutex_t *fork_one, pthread_mutex_t *fork_two);
 void	p_sleep(t_philo *philo);
 void	think(t_philo *philo);
-void	my_usleep(size_t time);
+void	my_sleep(size_t time, t_philo *philo);
 
 #endif

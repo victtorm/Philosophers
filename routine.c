@@ -6,7 +6,7 @@
 /*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:27:40 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/09/23 12:39:20 by vbritto-         ###   ########.fr       */
+/*   Updated: 2024/09/24 10:44:40 by vbritto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	*routine(void *philos)
 	if (philo->data->n_philo == 1)
 		return (just_one(philo));
 	if (philo->philo_id % 2 == 0)
-		my_usleep(10);
+		my_sleep(10, philo);
 	while (42)
 	{
 		if (!dinner_finish(philo))

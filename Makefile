@@ -1,9 +1,9 @@
 PHILO_FILES = main.c check.c start_data.c start_dinner.c utils.c routine.c \
 				acts.c
 OBJS = ${PHILO_FILES:.c=.o}
-CC = gcc
+CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -pthread -fsanitize=thread
 NAME = philo
 
 all:		${NAME}

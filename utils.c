@@ -6,7 +6,7 @@
 /*   By: vbritto- <vbritto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:42:55 by vbritto-          #+#    #+#             */
-/*   Updated: 2024/09/23 13:07:10 by vbritto-         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:14:58 by vbritto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,25 @@
 
 int	wait_all_philos(t_data *data)
 {
-	while (42)
+	int	i;
+
+	i = 0;
+	pthread_mutex_lock(&data->monitor);
+	while (i <= data->n_philo)
 	{
-		pthread_mutex_lock(&data->monitor);
 		if (data->fail == true)
 		{
 			pthread_mutex_unlock(&data->monitor);
 			return (0);
 		}
-		if (data->threads_ok == true)
+		else if (data->threads_ok == true)
 		{
 			pthread_mutex_unlock(&data->monitor);
 			break ;
 		}
-		pthread_mutex_unlock(&data->monitor);
+		i++;
 	}
+	pthread_mutex_unlock(&data->monitor);
 	return (1);
 }
 

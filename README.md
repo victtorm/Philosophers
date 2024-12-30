@@ -1,4 +1,4 @@
-![Banner](img/philo_banner.jpg "ps banner") <br>
+![Banner](img/philo_banner.png "ps banner") <br>
 
 <h2>🏁 Goals</h2>
 
